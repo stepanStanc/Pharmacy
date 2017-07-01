@@ -17,6 +17,8 @@ using Pharmacy.Views;
 
 namespace Pharmacy
 {
+    // I was HERE!
+    
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
