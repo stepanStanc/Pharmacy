@@ -1,0 +1,292 @@
+﻿<Controls:MetroWindow x:Class="Pharmacy.MainWindow"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Pharmacy"
+        ShowIconOnTitleBar="False"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        Title="MainWindow" Height="650" Width="1100">
+    <TabControl x:Name="main" >
+        <TabItem x:Name="med" Header="Medicine" >
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="15*"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <ListView x:Name="mainMeds">
+                    <ListView.View >
+                        <GridView >
+                            <GridViewColumn Header="Name" Width="150" DisplayMemberBinding="{Binding Name}" />
+                            <GridViewColumn Header="Price" Width="150" DisplayMemberBinding="{Binding Price}" />
+                            <GridViewColumn Header="Ingredients" Width="200"  DisplayMemberBinding="{Binding Ingredients}" />
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+                <Button Content="Delete" x:Name="delMed" Grid.Column="0" Grid.Row="1" Width="60"  Margin="100,0,0,0" Click="delMed_Click" />
+                <Button Content="Edit" x:Name="edMed" Grid.Column="0" Grid.Row="1" Width="60" Margin="232,0,332,0" Height="33" VerticalAlignment="Top" Click="edMed_CLick"  />
+
+                <Grid Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="1.5*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition Height="16*"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Text="Name" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Right" Margin="3" />
+                    <TextBox Grid.Column="1" x:Name="NewMedName" Grid.Row="1" Margin="3"/>
+
+                    <TextBlock Text="Price" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Right" Margin="3" />
+                    <TextBox Grid.Column="1" x:Name="NewMedPrc" Grid.Row="2" Margin="3"/>
+
+                    <Label Grid.Column="0" Grid.Row="3" Content="All Ingredients" FontWeight="SemiBold"/>
+                    <Label Grid.Column="1" Grid.Row="3" Content="Added Ingredients" FontWeight="SemiBold" />
+
+                    <ListView x:Name="medAllIng" SelectionChanged="medAllIngClick" Grid.Row="4">
+                        <ListView.View >
+                            <GridView >
+                                <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" />
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+
+                    <ListView x:Name="medNewIng" SelectionChanged="medNewIngClick" Grid.Row="4" Grid.Column="1">
+                        <ListView.View >
+                            <GridView >
+                                <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" />
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+
+                    <Button Content="Add" x:Name="addMed" Grid.Column="2" Grid.Row="4" Height="60" Click="addMed_Click" />
+                </Grid>
+            </Grid>
+        </TabItem>
+
+        <TabItem x:Name="pat" Header="Patients" >
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="7*"/>
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <ListView x:Name="allPats">
+                    <ListView.View >
+                        <GridView >
+                            <GridViewColumn Header="Name" Width="100" DisplayMemberBinding="{Binding Name}" />
+                            <GridViewColumn Header="Surname" Width="100" DisplayMemberBinding="{Binding Surname}" />
+                            <GridViewColumn Header="Age" Width="50" DisplayMemberBinding="{Binding Age}" />
+                            <GridViewColumn Header="Allergies" Width="300" DisplayMemberBinding="{Binding Allergies}" />
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+                <Button x:Name="delPat" Content="Delete" Grid.Column="1" Height="60" Click="delPat_Click"/>
+            </Grid>
+        </TabItem>
+
+        <TabItem x:Name="addPt" Header="Add patient">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="312*" />
+                    <ColumnDefinition Width="312*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.Column="3">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition/>
+                        <RowDefinition Height="6*"/>
+                        <RowDefinition/>
+                        <RowDefinition Height="6*"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="Allergies" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20"/>
+                    <Label Grid.Row="1" Content="All Alergies" FontWeight="SemiBold"/>
+                    <ListView x:Name="patAllAl" Grid.Row="2" SelectionChanged="patAllAlClick">
+                        <ListView.View >
+                            <GridView >
+                                <GridViewColumn Header="Name" Width="300" DisplayMemberBinding="{Binding Name}" />
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    <Label Grid.Row="3" Content="Patients Alergies" FontWeight="SemiBold"/>
+                    <ListView x:Name="patNewAl" Grid.Row="4" SelectionChanged="patNewAlClick">
+                        <ListView.View >
+                            <GridView >
+                                <GridViewColumn Header="Name" Width="300" DisplayMemberBinding="{Binding Name}" />
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </Grid>
+                <Grid Grid.Column="0" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="4*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="Name" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Right" Margin="3" />
+                    <TextBlock Text="Surname" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Right" Margin="3" />
+                    <TextBlock Text="Year of birth" Grid.Column="0" Grid.Row="3" HorizontalAlignment="Right" Margin="3" />
+
+                    <TextBox x:Name="patName" Grid.Column="1" Grid.Row="1" Margin="3"/>
+                    <TextBox x:Name="patSurname" Grid.Column="1" Grid.Row="2" Margin="3"/>
+                    <DatePicker x:Name="patBirth" Grid.Column="1" Grid.Row="3" Margin="3"/>
+
+                    <Button x:Name="addPat" Click="addPat_Click" Content="Add" Grid.Column="1" Grid.Row="13"/>
+                </Grid>
+            </Grid>
+        </TabItem>
+
+        <!-- Visibility="Collapsed" -->
+
+        <TabItem x:Name="editAl" Header="Edit Ingredients" >
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="4*"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <ListView x:Name="listEditAl" Grid.Row="0">
+                        <ListView.View >
+                            <GridView >
+                                <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" />
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    <Button x:Name="delAl" Content="Delete" Height="40" Width="60" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Click="delAl_Click" />
+                </Grid>
+
+                <TextBlock Text="Name" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,120,0" Grid.Column="1"/>
+                <TextBox x:Name="newAl" HorizontalAlignment="Center" Width="200" VerticalAlignment="Center" Margin="120,0,0,0" Grid.Column="1"/>
+                <Button Content="add" x:Name="addAl" Height="40" Width="60" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,120,0,0" Grid.Column="1" Click="addAl_Click" />
+
+            </Grid>
+        </TabItem>
+
+        <TabItem x:Name="sell" Header="Sell Medications">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1.5*"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="0.4*"/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition/>
+                        <RowDefinition Height="6*"/>
+                        <RowDefinition/>
+                        <RowDefinition Height="6*"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="Medications" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20"/>
+                    <Label Grid.Row="1" FontWeight="SemiBold" Content="All Medications"/>
+                    <ListView x:Name="sellAllMeds" SelectionChanged="sellAllMedsClick" Grid.Row="2">
+                        <ListView.View >
+                            <GridView >
+                                <GridViewColumn Header="Name" Width="80" DisplayMemberBinding="{Binding Name}" />
+                                <GridViewColumn Header="Price" Width="60" DisplayMemberBinding="{Binding Price}" />
+                                <GridViewColumn Header="Ingredients" Width="200"  DisplayMemberBinding="{Binding Ingredients}" />
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    <Label Grid.Row="3" FontWeight="SemiBold" Content="Sold Medications"/>
+                    <ListView x:Name="sellNewMeds" SelectionChanged="sellNewMedsClick" Grid.Row="4">
+                        <ListView.View >
+                            <GridView >
+                                <GridViewColumn Header="Name" Width="80" DisplayMemberBinding="{Binding Name}" />
+                                <GridViewColumn Header="Price" Width="60" DisplayMemberBinding="{Binding Price}" />
+                                <GridViewColumn Header="Ingredients" Width="200"  DisplayMemberBinding="{Binding Ingredients}" />
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    
+                </Grid>
+
+                <Grid Grid.Column="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition Height="6*"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="Patient" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20"/>
+                    <ListView x:Name="sellAllPats" Grid.Row="1" SelectionChanged="sellAllPatsClick">
+                        <ListView.View >
+                            <GridView >
+                                <GridViewColumn Header="Name" Width="100" DisplayMemberBinding="{Binding Name}" />
+                                <GridViewColumn Header="Surname" Width="100" DisplayMemberBinding="{Binding Surname}" />
+                                <GridViewColumn Header="Age" Width="50" DisplayMemberBinding="{Binding Age}" />
+                                <GridViewColumn Header="Allergies" Width="300" DisplayMemberBinding="{Binding Allergies}" />
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+
+                </Grid>
+                <Grid Grid.Column="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1.77*"/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition Height="1.6*" />
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="Total" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20"/>
+                    <TextBlock x:Name="totalPrc" Text="0" VerticalAlignment="Top" HorizontalAlignment="Center"  Grid.Row="1"/>
+                    <TextBlock x:Name="alWarning" Text="Warning" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="Hidden" Grid.Row="7" Foreground="Red" FontWeight="Bold"/>
+                    <Button x:Name="sellBtn" Content="Sell" Grid.Row="8" Click="sellBtn_Click" />
+                </Grid>
+            </Grid>
+        </TabItem>
+
+        <TabItem x:Name="sold" Header="Sold">
+            <ListView x:Name="allSold">
+                <ListView.View >
+                    <GridView >
+                        <GridViewColumn Header="Sold to" Width="150" DisplayMemberBinding="{Binding FullName}" />
+                        <GridViewColumn Header="Price" Width="100" DisplayMemberBinding="{Binding Price}" />
+                        <GridViewColumn Header="Date" Width="100" DisplayMemberBinding="{Binding Date}" />
+                        <GridViewColumn Header="Medications" Width="300" DisplayMemberBinding="{Binding Medications}" />
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </TabItem>
+    </TabControl>
+</Controls:MetroWindow>
